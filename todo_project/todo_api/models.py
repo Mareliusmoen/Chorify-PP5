@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import JSONField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class UserManager(BaseUserManager):
@@ -40,3 +40,8 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+class ShoppingList(models.Model):
+    name = models.CharField(max_length=100)
+    items = JSONField(default=list)

@@ -1,9 +1,10 @@
 from django.urls import path
-from . import views
+from .views import UserList, UserDetail, ShoppingListView, ShoppingListDetailView
 
 urlpatterns = [
     # User management
-    path('users/', views.UserList.as_view(), name='user-list'),
-    path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
-    # Add other URL patterns for your todo_api app here
+    path('users/', UserList.as_view(), name='user-list'),
+    path('users/<int:pk>/', UserDetail.as_view(), name='user-detail'),
+    path('shopping-lists/', ShoppingListView.as_view(), name='shopping-list'),
+    path('shopping-lists/<int:pk>/', ShoppingListDetailView.as_view(), name='shopping-list-detail'),
 ]
