@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'rest_framework',
+    'corsheaders',
     'dj_rest_auth',
     'rest_framework.authtoken',
     'allauth',
@@ -47,11 +48,16 @@ INSTALLED_APPS = [
     'todo_api',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173'
+]
+
 SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
