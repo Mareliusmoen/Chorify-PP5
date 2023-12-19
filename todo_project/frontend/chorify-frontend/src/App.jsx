@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './components/signin';
+import LogOut from './components/LogOut';
+import ProtectedRoute from './components/ProtectedRoute';
+import MainInterface from './components/MainInterface';
+import './App.css';
 
 function App() {
   const [shoppingLists, setShoppingLists] = useState([]);
@@ -39,13 +43,28 @@ function App() {
     // fetchTodos();
   }, []);
 
-  return (
-    <>
-      <div className="signin-style">
-        <SignIn />
-      </div>
-    </>
-  );
+  function isAuthenticated() {
+    // Check if the token exists in localStorage
+    return localStorage.getItem('token') != null;
 }
 
+return (
+  <Router>
+      <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/logout" element={<LogOut />} />
+          <Route
+              path="/main-interface"
+              element={
+                  <ProtectedRoute>
+                      <MainInterface />
+                  </ProtectedRoute>
+              }
+          />
+          {/* Other protected routes */}
+      </Routes>
+  </Router>
+);
+}
 export default App;

@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated } from './ProtectedRoute';
 import Avatar from '@mui/material/Avatar';
 import logo from '../assets/images/chorify-logo.png';
 import Button from '@mui/material/Button';
@@ -94,13 +97,47 @@ const theme = createTheme({
 
 
 export default function SignIn() {
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (isAuthenticated()) {
+            navigate('/main-interface');
+        }
+    }, [navigate]);
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const signInUrl = `${apiUrl}auth/login/`;
+
+        try {
+            const response = await fetch(signInUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: data.get('email'),
+                    password: data.get('password'),
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Login successful:', responseData);
+
+            // Store the token in localStorage
+            localStorage.setItem('token', responseData.token);
+
+            // Redirect to the main interface
+            navigate('/main-interface');
+
+        } catch (error) {
+            console.error('Login failed:', error);
+            // Handle errors, e.g., show error message to the user
+        }
     };
 
     return (
