@@ -26,7 +26,7 @@ function Copyright(props) {
         >
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Your Website
+                Chorify
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -86,6 +86,7 @@ const theme = createTheme({
                 root: {
                     backgroundColor: '#616161', // lighter grey
                     color: 'white', // text color
+                    maxWidth: '100px',
                     '&:hover': {
                         backgroundColor: '#757575', // even lighter grey on hover
                     },
@@ -225,7 +226,7 @@ export default function SignIn() {
                             </Grid>
                             <Grid item>
                                 <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {"Sign up here!"}
                                 </Link>
                             </Grid>
                         </Grid>
