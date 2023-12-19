@@ -117,6 +117,7 @@ export default function SignIn() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    username: data.get('email'),
                     email: data.get('email'),
                     password: data.get('password'),
                 }),
@@ -151,6 +152,7 @@ export default function SignIn() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        maxWidth: '300px'
                     }}
                 >
                     <h3>Welcome to Chorify</h3>
@@ -225,7 +227,14 @@ export default function SignIn() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link
+                                    href="#"
+                                    variant="body2"
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        navigate('/SignUp');
+                                    }}
+                                >
                                     {"Sign up here!"}
                                 </Link>
                             </Grid>
