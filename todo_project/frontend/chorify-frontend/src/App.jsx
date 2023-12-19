@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import SignIn from './components/signin';
 
 function App() {
   const [shoppingLists, setShoppingLists] = useState([]);
@@ -40,21 +41,7 @@ function App() {
 
   return (
     <>
-      <h1>Shopping Lists</h1>
-      {/* Render shopping lists here */}
-      <ul>
-        {shoppingLists.map(list => (
-          <li key={list.id}>{list.name}</li>
-        ))}
-      </ul>
-
-      <h1>To-dos</h1>
-      {/* Render todos here */}
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      <SignIn />
     </>
   );
 }
