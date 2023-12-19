@@ -41,7 +41,9 @@ function App() {
 
   return (
     <>
-      <SignIn />
+      <div className="signin-style">
+        <SignIn />
+      </div>
     </>
   );
 }
