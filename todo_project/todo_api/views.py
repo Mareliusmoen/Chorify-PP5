@@ -29,6 +29,10 @@ class ShoppingListView(generics.ListCreateAPIView):
     queryset = ShoppingList.objects.all()
     serializer_class = ShoppingListSerializer
 
+    def perform_create(self, serializer):
+        # Set the user to the currently authenticated user when creating a new ShoppingList
+        serializer.save(user=self.request.user)
+
 class ShoppingListDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ShoppingList.objects.all()
     serializer_class = ShoppingListSerializer
