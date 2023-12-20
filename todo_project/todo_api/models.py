@@ -46,7 +46,7 @@ class User(AbstractBaseUser):
 class ShoppingList(models.Model):
     name = models.CharField(max_length=100)
     items = JSONField(default=list)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name

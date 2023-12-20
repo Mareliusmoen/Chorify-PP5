@@ -130,8 +130,8 @@ export default function SignIn() {
             const responseData = await response.json();
             console.log('Login successful:', responseData);
 
-            // Store the token in localStorage
-            localStorage.setItem('token', responseData.token);
+            const token = responseData.key;
+            localStorage.setItem('token', token);
 
             // Redirect to the main interface
             navigate('/main-interface');
@@ -160,8 +160,8 @@ export default function SignIn() {
                         sx={{
                             m: 1,
                             bgcolor: 'white',
-                            width: 155, // set width to 75px
-                            height: 155, // set height to 75px
+                            width: 155,
+                            height: 155,
                         }}
                         src={logo}
                     >

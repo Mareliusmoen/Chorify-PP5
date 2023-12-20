@@ -25,17 +25,25 @@ class UserSerializer(serializers.ModelSerializer):
 class ShoppingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShoppingList
-        fields = ['id', 'name', 'items', 'user']
-        read_only_fields = ['user']
+        fields = ['id', 'name', 'user_id', 'items']
 
-    def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        shopping_list = ShoppingList.objects.create(**validated_data, user=user_data)
-        return shopping_list
+    def perform_create(self, serializer):
+        user_id = self.context['request'].user.id if self.context['request'].user.is_authenticated else None
+        serializer.save(user_id=user_id)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
-        instance.items = validated_data.get('items', instance.items)
-        instance.user = validated_data.get('user', instance.user)
+        instance.user_id = validated_data.get('user_id', instance.user_id)
+
+        # Handle items update
+        items_data = validated_data.get('items', [])
+        instance.items.clear()  # Remove existing items
+
+        for item_data in items_data:
+            item, created = instance.items.get_or_create(item=item_data['item'], defaults={'quantity': item_data['quantity']})
+            if not created:
+                item.quantity = item_data['quantity']
+                item.save()
+
         instance.save()
         return instance
