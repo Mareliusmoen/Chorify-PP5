@@ -51,3 +51,13 @@ class ShoppingList(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ToDoList(models.Model):
+    description = models.TextField()
+    done = models.BooleanField(default=False)
+    due_date = models.DateField(null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.description

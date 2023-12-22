@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import ShoppingList
+from .models import ToDoList
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -49,5 +50,30 @@ class ShoppingListSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.items = validated_data.get('items', instance.items)
+        instance.save()
+        return instance
+
+
+class ToDoListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = ToDoList
+        fields = ['id', 'description', 'done', 'due_date', 'user']
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user', None)
+        todo_list = ToDoList(**validated_data)
+
+        if user_data:
+            todo_list.user = user_data
+
+        todo_list.save()
+        return todo_list
+
+    def update(self, instance, validated_data):
+        instance.description = validated_data.get('description', instance.description)
+        instance.done = validated_data.get('done', instance.done)
+        instance.due_date = validated_data.get('due_date', instance.due_date)
         instance.save()
         return instance

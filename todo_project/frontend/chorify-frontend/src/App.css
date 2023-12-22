@@ -15,7 +15,8 @@ body {
     border-radius: 50%;
 }
 
-.shopping-list-column {
+.shopping-list-column,
+.to-do-list-column {
     border: 1px solid white;
     border-radius: 15px;
     padding: 40px;

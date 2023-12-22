@@ -9,6 +9,8 @@ from .serializers import UserSerializer, ShoppingListSerializer, UserRegistratio
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
+from .models import ToDoList
+from .serializers import ToDoListSerializer
 
 
 class UserRegistrationView(generics.CreateAPIView):
@@ -61,6 +63,36 @@ class ShoppingListDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = ShoppingList.objects.all()
     serializer_class = ShoppingListSerializer
+
+    def perform_update(self, serializer):
+        try:
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            print(f"Error in perform_update: {e}")
+            raise
+
+
+class ToDoListView(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = ToDoListSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return ToDoList.objects.filter(user=user)
+
+    def perform_create(self, serializer):
+        try:
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            print(f"Error in perform_create: {e}")
+            raise
+
+class ToDoListDetailView(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = ToDoList.objects.all()
+    serializer_class = ToDoListSerializer
 
     def perform_update(self, serializer):
         try:

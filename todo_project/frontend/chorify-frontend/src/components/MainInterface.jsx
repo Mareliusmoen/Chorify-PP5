@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShoppingLists from './ShoppingLists';
+import ToDoLists from './ToDoLists';
 
 function MainInterface() {
     const navigate = useNavigate();
@@ -19,10 +20,17 @@ function MainInterface() {
                     <img className="main-logo" src="./src/assets/images/chorify-logo.png" alt="Chorify logo" />
                 </div>
             </div>
+            
             <div className="row">
                 <div className="col shopping-list-column">
                     <h2>Shopping Lists</h2>
                     <ShoppingLists />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col to-do-list-column">
+                    <h2>To-Do Lists</h2>
+                    <ToDoLists />
                 </div>
             </div>
             <div className="row">
