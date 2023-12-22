@@ -20,33 +20,26 @@ function SignUp() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: data.get('email'),
+                    username: data.get('username'),
                     email: data.get('email'),
                     password1: data.get('password1'),
                     password2: data.get('password2'),
                 }),
             });
-            console.log(JSON.stringify({
-                username: data.get('email'),
-                email: data.get('email'),
-                password1: data.get('password1'),
-                password2: data.get('password2'),
-            }));
 
             if (response.status === 204) {
                 console.log('Registration successful');
-                navigate('/sign-in');
+                navigate('/login');
             } else {
                 const responseData = await response.json();
                 console.log('Registration successful:', responseData);
-                localStorage.setItem('token', responseData.token);
-                navigate('/sign-in');
+                const token = responseData.key;
+                localStorage.setItem('Token', token);
+                navigate('/login');
             }
-
         } catch (error) {
             console.error('Registration failed:', error);
             setError('Registration failed. Please try again.');
-            // Handle errors, e.g., show error message to the user
         }
     };
     const textFieldStyles = {
@@ -110,8 +103,8 @@ function SignUp() {
                     sx={{
                         m: 1,
                         bgcolor: 'white',
-                        width: 155, // set width to 75px
-                        height: 155, // set height to 75px
+                        width: 155,
+                        height: 155,
                     }}
                     src={logo}
                 >
@@ -120,6 +113,20 @@ function SignUp() {
                     Sign Up
                 </Typography>
                 {error && <Typography color="error">{error}</Typography>}
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    autoFocus
+                    sx={textFieldStyles}
+                    InputLabelProps={{
+                        style: { color: 'white' },
+                    }}
+                />
                 <TextField
                     margin="normal"
                     required

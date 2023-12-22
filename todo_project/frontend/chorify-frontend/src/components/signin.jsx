@@ -8,31 +8,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
-function Copyright(props) {
-    return (
-        <Typography
-            variant="body2"
-            align="center"
-            sx={{ color: 'lightgray' }}
-            {...props}
-        >
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Chorify
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const theme = createTheme({
     palette: {
@@ -137,7 +118,9 @@ export default function SignIn() {
             // Handle errors, e.g., show error message to the user
         }
     };
-
+    const handleSignUpClick = () => {
+        navigate('/signup');
+    };
     return (
         <ThemeProvider theme={theme}>
             <Container component="main">
@@ -186,6 +169,7 @@ export default function SignIn() {
                             label="Remember me"
                         />
                         <Button
+                            className="grey-button"
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -193,21 +177,11 @@ export default function SignIn() {
                         >
                             Sign In
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
+                        <Button onClick={handleSignUpClick} variant="body2">
+                            {"Don't have an account? Sign Up"}
+                        </Button>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
         </ThemeProvider>
     );
