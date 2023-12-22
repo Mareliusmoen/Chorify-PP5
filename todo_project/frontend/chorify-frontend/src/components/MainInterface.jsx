@@ -27,7 +27,7 @@ function MainInterface() {
             </div>
             <div className="row">
                 <div className="col text-center">
-                    <button className="logout-button" onClick={handleLogout}>Log out</button>
+                    <button className="grey-button" onClick={handleLogout}>Log out</button>
                 </div>
             </div>
         </div>

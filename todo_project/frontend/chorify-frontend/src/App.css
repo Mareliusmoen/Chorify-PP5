@@ -23,9 +23,68 @@ body {
     margin-bottom: 40px;
 }
 
-.logout-button {
+.list-group-item {
+    background-color: rgb(64, 64, 64);
+    color: white;
+}
+
+.list-group-item a {
+    color: white !important;
+    text-decoration: underline !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    background-color: rgb(64, 64, 64);
+    color: white;
+}
+
+.modal-body input {
+    background-color: rgb(64, 64, 64);
+    color: white;
+}
+
+input::placeholder {
+    color: white !important;
+}
+input:focus {
+    background-color: rgb(64, 64, 64) !important;
+    color: white !important;
+    border: 2px solid white !important;
+}
+
+.grey-button {
     margin-top: 20px;
     background-color: rgb(64, 64, 64);
     color: white;
     max-width: 100px;
+}
+
+.grey-button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.create-button {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+.create-button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.close-button {
+    background-color: lightgray;
+    color: black;
+    border: 1px solid black;
+}
+.close-button:hover {
+    background-color: rgb(64, 64, 64);
+    color: white;
+    border: 1px solid white;
 }
