@@ -324,10 +324,21 @@ const ShoppingLists = () => {
                                                     setEditingShoppingList({ ...editingShoppingList, items: updatedItems });
                                                 }}
                                             />
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-danger btn-sm"
+                                                onClick={() => {
+                                                    const updatedItems = [...editingShoppingList.items];
+                                                    updatedItems.splice(index, 1);
+                                                    setEditingShoppingList({ ...editingShoppingList, items: updatedItems });
+                                                }}
+                                            >
+                                                -
+                                            </button>
                                             {index === editingShoppingList.items.length - 1 && (
                                                 <button
                                                     type="button"
-                                                    className="btn btn-outline-primary btn-sm"
+                                                    className="btn btn-outline-primary btn-sm ms-2"
                                                     onClick={() => {
                                                         const updatedItems = [...editingShoppingList.items, { item: '', quantity: '' }];
                                                         setEditingShoppingList({ ...editingShoppingList, items: updatedItems });
@@ -343,14 +354,13 @@ const ShoppingLists = () => {
 
                             {/* Modal Footer */}
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-primary" onClick={() => editShoppingList(editingShoppingList)} data-bs-dismiss="modal">
+                                <button type="button" className="create-button" onClick={() => editShoppingList(editingShoppingList)} data-bs-dismiss="modal">
                                     Save Changes
                                 </button>
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                                <button type="button" className="close-button" data-bs-dismiss="modal">
                                     Close
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
