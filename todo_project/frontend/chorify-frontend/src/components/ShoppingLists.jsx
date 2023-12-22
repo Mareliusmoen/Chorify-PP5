@@ -101,8 +101,13 @@ const editShoppingList = async (editedShoppingList) => {
 
 const deleteShoppingList = async (shoppingListId) => {
     try {
+        const token = localStorage.getItem('Token');
         const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/${shoppingListId}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Token ${token}`,
+            },
+            credentials: 'include',
         });
 
         if (response.ok) {
