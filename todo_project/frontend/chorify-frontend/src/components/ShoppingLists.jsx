@@ -14,7 +14,7 @@ const ShoppingLists = () => {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/`, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Token ${localStorage.getItem('token')}`,
+                        'Authorization': `Token ${token}`,
                     },
                     credentials: 'include',
                 });
@@ -35,33 +35,34 @@ const ShoppingLists = () => {
         fetchShoppingLists();
     }, []);
 
-const createShoppingList = async () => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${token}`,
-            },
-            body: JSON.stringify({
-                name: newShoppingListName,
-                items: newShoppingListItems.map(({ item, quantity }) => ({ item, quantity })),
-            }),
-        });
+    const createShoppingList = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${token}`,
+                },
+                body: JSON.stringify({
+                    name: newShoppingListName,
+                    items: newShoppingListItems.map(({ item, quantity }) => ({ item, quantity })),
+                }),
+            });
 
-        if (response.ok) {
-            const result = await response.json();
-            setShoppingLists((prevLists) => [...prevLists, result]);
-            setNewShoppingListName('');
-            setNewShoppingListItems([{ item: '', quantity: '' }]); // Reset the items state
-        } else {
-            throw new Error('Network response was not ok for creating a shopping list.');
+            if (response.ok) {
+                const result = await response.json();
+                setShoppingLists((prevLists) => [...prevLists, result]);
+                setNewShoppingListName('');
+                setNewShoppingListItems([{ item: '', quantity: '' }]); // Reset the items state
+            } else {
+                throw new Error('Network response was not ok for creating a shopping list.');
+            }
+        } catch (error) {
+            console.error('There has been a problem with your create operation for shopping list:', error);
         }
-    } catch (error) {
-        console.error('There has been a problem with your create operation for shopping list:', error);
-    }
-};
+    };
+
 
 
 const startEditing = (shoppingList) => {

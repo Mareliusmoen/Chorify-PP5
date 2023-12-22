@@ -35,8 +35,7 @@ class ShoppingListView(generics.ListCreateAPIView):
     serializer_class = ShoppingListSerializer
 
     def perform_create(self, serializer):
-        user_id = self.request.user.id if self.request.user.is_authenticated else None
-        serializer.save(user_id=user_id)
+        serializer.save(user=self.request.user)
 
 
 class ShoppingListDetailView(generics.RetrieveUpdateDestroyAPIView):

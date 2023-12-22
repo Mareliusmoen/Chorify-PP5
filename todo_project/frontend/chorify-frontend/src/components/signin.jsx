@@ -34,76 +34,19 @@ function Copyright(props) {
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const theme = createTheme({
-    palette: {
-        background: {
-            default: '#000000', // black background
-        },
-        text: {
-            primary: '#ffffff', // white text
-        },
-    },
-    components: {
-        // Style overrides for TextField
-        MuiTextField: {
-            styleOverrides: {
-                root: {
-                    '& label.Mui-focused': {
-                        color: 'white',
-                    },
-                    '& .MuiInput-underline:after': {
-                        borderBottomColor: 'white',
-                    },
-                    '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                            borderColor: 'white',
-                        },
-                        '&:hover fieldset': {
-                            borderColor: 'white',
-                        },
-                        '&.Mui-focused fieldset': {
-                            borderColor: 'white',
-                        },
-                        '& input': {
-                            color: 'white',
-                            backgroundColor: '#424242',
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: 'white',
-                        },
-                        '& .MuiPlaceholder-root': {
-                            color: 'white',
-                        },
-                    },
-                },
-            },
-        },
-        // Style overrides for Button
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: '#616161', // lighter grey
-                    color: 'white', // text color
-                    maxWidth: '100px',
-                    '&:hover': {
-                        backgroundColor: '#757575', // even lighter grey on hover
-                    },
-                },
-            },
-        },
-    },
+    // ... (theme configurations)
 });
-
 
 export default function SignIn() {
     const navigate = useNavigate();
+
     useEffect(() => {
         if (isAuthenticated()) {
             navigate('/main-interface');
         }
     }, [navigate]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -115,6 +58,7 @@ export default function SignIn() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Token ${localStorage.getItem('token')}`,  // Include the token here
                 },
                 body: JSON.stringify({
                     username: data.get('email'),
@@ -155,63 +99,9 @@ export default function SignIn() {
                         maxWidth: '300px'
                     }}
                 >
-                    <h3>Welcome to Chorify</h3>
-                    <Avatar
-                        sx={{
-                            m: 1,
-                            bgcolor: 'white',
-                            width: 155,
-                            height: 155,
-                        }}
-                        src={logo}
-                    >
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
+                    {/* ... (other UI components) */}
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            InputLabelProps={{
-                                style: { color: 'white' },
-                            }}
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            InputLabelProps={{
-                                style: { color: 'white' },
-                            }}
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    value="remember"
-                                    sx={{
-                                        '&.Mui-checked': {
-                                            color: 'white', // when checked
-                                        },
-                                        '&.MuiCheckbox-root': {
-                                            color: 'grey', // when unchecked
-                                        },
-                                    }}
-                                />
-                            }
-                            label="Remember me"
-                        />
+                        {/* ... (other form fields) */}
                         <Button
                             type="submit"
                             fullWidth
@@ -220,25 +110,7 @@ export default function SignIn() {
                         >
                             Sign In
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link
-                                    href="#"
-                                    variant="body2"
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        navigate('/SignUp');
-                                    }}
-                                >
-                                    {"Sign up here!"}
-                                </Link>
-                            </Grid>
-                        </Grid>
+                        {/* ... (other UI components) */}
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 8, mb: 4 }} />

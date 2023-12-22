@@ -23,17 +23,18 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'email', 'is_active', 'is_admin']
 
 class ShoppingListSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+
     class Meta:
         model = ShoppingList
-        fields = ['id', 'name', 'user_id', 'items']
+        fields = ['id', 'name', 'user', 'items']
 
     def perform_create(self, serializer):
-        user_id = self.context['request'].user.id if self.context['request'].user.is_authenticated else None
-        serializer.save(user_id=user_id)
+        user = self.context['request'].user if self.context['request'].user.is_authenticated else None
+        serializer.save(user=user)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
-        instance.user_id = validated_data.get('user_id', instance.user_id)
 
         # Handle items update
         items_data = validated_data.get('items', [])
