@@ -35,8 +35,61 @@ function Copyright(props) {
 }
 
 const theme = createTheme({
-    // ... (theme configurations)
+    palette: {
+        background: {
+            default: '#000000',
+        },
+        text: {
+            primary: '#ffffff',
+        },
+    },
+    components: {
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    background: 'rgb(64, 64, 64)', // Set background color
+                    '& .MuiInputBase-input': {
+                        color: 'white', // Set text color
+                    },
+                    '& .MuiInputLabel-root, & .MuiInputLabel-formControl': {
+                        color: 'white !important', // Set label color (important to override default styles)
+                    },
+                    '& .MuiInput-underline:before, & .MuiInput-underline:after': {
+                        borderBottomColor: 'white', // Set underline color
+                    },
+                    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                        borderBottomColor: 'white', // Set underline color on hover
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: 'white', // Set outline border color
+                        },
+                        '&:hover fieldset': {
+                            borderColor: 'white', // Set outline border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: 'white', // Set outline border color when focused
+                        },
+                    },
+                },
+            },
+        },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    color: 'white !important', // Set the default checkbox color
+                    '&$checked': {
+                        color: 'grey !important', // Set the checked checkbox color
+                        '&.MuiIconButton-colorSecondary': {
+                            color: 'grey !important', // Set the checked checkbox color for secondary color
+                        },
+                    },
+                },
+            },
+        },
+    },
 });
+
 
 
 export default function SignIn() {
@@ -54,7 +107,7 @@ export default function SignIn() {
         const { username, password } = event.currentTarget.elements;
         const apiUrl = import.meta.env.VITE_API_URL;
         const signInUrl = `${apiUrl}auth/login/`;
-    
+
         try {
             const response = await fetch(signInUrl, {
                 method: 'POST',
@@ -66,17 +119,17 @@ export default function SignIn() {
                     password: password.value,
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}, ${response.statusText}`);
             }
-    
+
             const responseData = await response.json();
             console.log('Login successful:', responseData);
-    
+
             const token = responseData.key;
             localStorage.setItem('Token', token);
-    
+
             // Redirect to the main interface
             navigate('/main-interface');
         } catch (error) {
@@ -95,9 +148,18 @@ export default function SignIn() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        maxWidth: '300px'
-                    }}
-                >
+                        maxWidth: '400px'
+                    }}>
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-auto">
+                                <h1>Chorify</h1>
+                            </div>
+                            <div className="col-auto">
+                                <img className="main-logo" src="./src/assets/images/chorify-logo.png" alt="Chorify logo" />
+                            </div>
+                        </div>
+                    </div>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
