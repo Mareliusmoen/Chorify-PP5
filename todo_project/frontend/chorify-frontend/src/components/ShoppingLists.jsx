@@ -7,10 +7,13 @@ const ShoppingLists = () => {
     const [newShoppingListItems, setNewShoppingListItems] = useState([{ item: '', quantity: '' }]);
     const [editingShoppingList, setEditingShoppingList] = useState(null);
 
+
+    
     useEffect(() => {
         const fetchShoppingLists = async () => {
             try {
-                const token = localStorage.getItem('token');
+                const token = localStorage.getItem('Token');
+    
                 const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/`, {
                     headers: {
                         'Content-Type': 'application/json',
@@ -18,7 +21,7 @@ const ShoppingLists = () => {
                     },
                     credentials: 'include',
                 });
-
+    
                 if (response.ok) {
                     const result = await response.json();
                     setShoppingLists(result);
@@ -31,13 +34,13 @@ const ShoppingLists = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchShoppingLists();
     }, []);
 
     const createShoppingList = async () => {
         try {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('Token');
             const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/`, {
                 method: 'POST',
                 headers: {
@@ -245,7 +248,7 @@ return (
 
                     {/* Modal Footer */}
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={createShoppingList}>
+                        <button type="button" className="btn btn-primary" onClick={createShoppingList}data-bs-dismiss="modal">
                             Create
                         </button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
@@ -328,7 +331,7 @@ return (
 
                         {/* Modal Footer */}
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" onClick={() => editShoppingList(editingShoppingList)}>
+                            <button type="button" className="btn btn-primary" onClick={() => editShoppingList(editingShoppingList)} data-bs-dismiss="modal">
                                 Save Changes
                             </button>
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">

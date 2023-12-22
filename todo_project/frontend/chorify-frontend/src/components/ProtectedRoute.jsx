@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 export function isAuthenticated() {
-    const userToken = localStorage.getItem('token');
+    const userToken = localStorage.getItem('Token');
     return !!userToken;
 }
 

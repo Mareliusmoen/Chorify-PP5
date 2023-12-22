@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import User, ShoppingList
+from .models import ShoppingList
 from django.contrib.auth import get_user_model
-import json
 
 User = get_user_model()
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -17,21 +17,24 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'is_active', 'is_admin']
+        fields = ['id', 'email', 'is_active', 'is_staff']
 
 class ShoppingListSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+    user = UserSerializer(read_only=True)  # Change PrimaryKeyRelatedField to UserSerializer
 
     class Meta:
         model = ShoppingList
         fields = ['id', 'name', 'user', 'items']
 
-    def perform_create(self, serializer):
-        user = self.context['request'].user if self.context['request'].user.is_authenticated else None
-        serializer.save(user=user)
+    def create(self, validated_data):
+        user = self.context['request'].user
+        shopping_list = ShoppingList(user=user, **validated_data)
+        shopping_list.save()
+        return shopping_list
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)

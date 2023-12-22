@@ -2,6 +2,15 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 from .models import User
+from django.contrib import admin
+from .models import ShoppingList
+
+class ShoppingListAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user') 
+    search_fields = ('name', 'user__email')
+    list_filter = ('user',)
+admin.site.register(ShoppingList, ShoppingListAdmin)
+
 
 class CustomUserAdmin(BaseUserAdmin):
     ordering = ['id']

@@ -6,7 +6,7 @@ const LogOut = () => {
     
     useEffect(() => {
         // Clear the token from localStorage or any other storage where it is kept
-        localStorage.removeItem('token');
+        localStorage.removeItem('Token');
 
         // Redirect to the login page
         navigate('/login');

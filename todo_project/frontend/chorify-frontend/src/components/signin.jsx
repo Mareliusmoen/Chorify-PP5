@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticated } from './ProtectedRoute';
 import Avatar from '@mui/material/Avatar';
 import logo from '../assets/images/chorify-logo.png';
 import Button from '@mui/material/Button';
@@ -15,6 +14,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 function Copyright(props) {
     return (
@@ -38,48 +38,47 @@ const theme = createTheme({
     // ... (theme configurations)
 });
 
+
 export default function SignIn() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isAuthenticated()) {
+        // Check if the user is already authenticated and redirect if true
+        if (localStorage.getItem('Token')) {
             navigate('/main-interface');
         }
     }, [navigate]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        const { username, password } = event.currentTarget.elements;
         const apiUrl = import.meta.env.VITE_API_URL;
         const signInUrl = `${apiUrl}auth/login/`;
-
+    
         try {
             const response = await fetch(signInUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Token ${localStorage.getItem('token')}`,  // Include the token here
                 },
                 body: JSON.stringify({
-                    username: data.get('email'),
-                    email: data.get('email'),
-                    password: data.get('password'),
+                    username: username.value,
+                    password: password.value,
                 }),
             });
-
+    
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}, ${response.statusText}`);
             }
-
+    
             const responseData = await response.json();
             console.log('Login successful:', responseData);
-
+    
             const token = responseData.key;
-            localStorage.setItem('token', token);
-
+            localStorage.setItem('Token', token);
+    
             // Redirect to the main interface
             navigate('/main-interface');
-
         } catch (error) {
             console.error('Login failed:', error);
             // Handle errors, e.g., show error message to the user
@@ -99,9 +98,31 @@ export default function SignIn() {
                         maxWidth: '300px'
                     }}
                 >
-                    {/* ... (other UI components) */}
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        {/* ... (other form fields) */}
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="username"
+                            label="Username"
+                            name="username"
+                            autoComplete="username"
+                            autoFocus
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
                         <Button
                             type="submit"
                             fullWidth
@@ -110,7 +131,18 @@ export default function SignIn() {
                         >
                             Sign In
                         </Button>
-                        {/* ... (other UI components) */}
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 8, mb: 4 }} />
