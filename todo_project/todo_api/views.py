@@ -25,13 +25,15 @@ class UserRegistrationView(generics.CreateAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]  # Require authentication for the list and create views
+    # Require authentication for the list and create views
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]  # Require authentication for the detail, update, and destroy views
+    # Require authentication for the detail, update, and destroy views
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class ShoppingListView(generics.ListCreateAPIView):
@@ -53,8 +55,16 @@ class ShoppingListView(generics.ListCreateAPIView):
             print(f"Error in perform_create: {e}")
             raise
 
+
 class ShoppingListDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = ShoppingList.objects.all()
     serializer_class = ShoppingListSerializer
+
+    def perform_update(self, serializer):
+        try:
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            print(f"Error in perform_update: {e}")
+            raise

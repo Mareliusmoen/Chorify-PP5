@@ -51,6 +51,7 @@ const ShoppingLists = () => {
                     name: newShoppingListName,
                     items: newShoppingListItems.map(({ item, quantity }) => ({ item, quantity })),
                 }),
+                credentials: 'include',
             });
 
             if (response.ok) {
@@ -73,24 +74,19 @@ const startEditing = (shoppingList) => {
 };
 const editShoppingList = async (editedShoppingList) => {
     try {
-        const editModalElement = document.getElementById('editModal');
-        const editModal = new window.bootstrap.Modal(editModalElement);
-
-        if (!editModal._isInitialized) {
-            editModal.show();
-        }
-
-        const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/${editedShoppingList.id}`, {
+        const token = localStorage.getItem('Token');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}shopping-lists/${editedShoppingList.id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`,
             },
             body: JSON.stringify(editedShoppingList),
+            credentials: 'include',
         });
 
         if (response.ok) {
             const updatedList = await response.json();
-
             setShoppingLists((prevLists) =>
                 prevLists.map((list) => (list.id === updatedList.id ? updatedList : list))
             );

@@ -31,23 +31,23 @@ class ShoppingListSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'user', 'items']
 
     def create(self, validated_data):
-        user = self.context['request'].user
-        shopping_list = ShoppingList(user=user, **validated_data)
+        # Remove 'user' from validated_data if present
+        user_data = validated_data.pop('user', None)
+
+        # Create the ShoppingList object without 'user'
+        shopping_list = ShoppingList(**validated_data)
+
+        # If 'user' data is available, set it separately
+        if user_data:
+            shopping_list.user = user_data
+
+        # Save the instance to the database
         shopping_list.save()
+
         return shopping_list
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
-
-        # Handle items update
-        items_data = validated_data.get('items', [])
-        instance.items.clear()  # Remove existing items
-
-        for item_data in items_data:
-            item, created = instance.items.get_or_create(item=item_data['item'], defaults={'quantity': item_data['quantity']})
-            if not created:
-                item.quantity = item_data['quantity']
-                item.save()
-
+        instance.items = validated_data.get('items', instance.items)
         instance.save()
         return instance
