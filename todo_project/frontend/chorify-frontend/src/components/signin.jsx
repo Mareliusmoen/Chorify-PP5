@@ -86,7 +86,7 @@ export default function SignIn() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { username, password } = event.currentTarget.elements;
-        const apiUrl = "chorify-554b3183ed2e.herokuapp.com/";
+        const apiUrl = "chorify-554b3183ed2e.herokuapp.com/api/";
         const signInUrl = `${apiUrl}auth/login/`;
 
         try {
