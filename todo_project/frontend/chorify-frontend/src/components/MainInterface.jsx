@@ -7,7 +7,7 @@ function MainInterface() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        navigate('/logout'); // Assuming '/logout' is the path where the LogOut component is rendered
+        navigate('/logout');
     };
 
     return (
