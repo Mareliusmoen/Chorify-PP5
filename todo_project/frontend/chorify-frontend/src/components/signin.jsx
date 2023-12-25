@@ -90,10 +90,12 @@ export default function SignIn() {
         const signInUrl = `${apiUrl}auth/login/`;
 
         try {
+            const csrfToken = localStorage.getItem('csrftoken');
             const response = await fetch(signInUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
                 },
                 body: JSON.stringify({
                     username: username.value,
