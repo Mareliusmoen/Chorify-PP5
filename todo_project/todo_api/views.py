@@ -44,18 +44,20 @@ class ShoppingListView(generics.ListCreateAPIView):
     serializer_class = ShoppingListSerializer
 
     def get_queryset(self):
-        # Use the authenticated user from the request
         user = self.request.user
-        # Filter shopping lists based on the authenticated user
         return ShoppingList.objects.filter(user=user)
 
     def perform_create(self, serializer):
         try:
-            # Use self.request.user directly as the authenticated user has already been determined
             serializer.save(user=self.request.user)
         except Exception as e:
             print(f"Error in perform_create: {e}")
             raise
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = ShoppingListSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
 
 
 class ShoppingListDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -70,6 +72,11 @@ class ShoppingListDetailView(generics.RetrieveUpdateDestroyAPIView):
         except Exception as e:
             print(f"Error in perform_update: {e}")
             raise
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = ShoppingListSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
 
 
 class ToDoListView(generics.ListCreateAPIView):
@@ -88,6 +95,12 @@ class ToDoListView(generics.ListCreateAPIView):
             print(f"Error in perform_create: {e}")
             raise
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = ToDoListSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
+
+
 class ToDoListDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -100,3 +113,8 @@ class ToDoListDetailView(generics.RetrieveUpdateDestroyAPIView):
         except Exception as e:
             print(f"Error in perform_update: {e}")
             raise
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = ToDoListSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK, content_type='application/json')
