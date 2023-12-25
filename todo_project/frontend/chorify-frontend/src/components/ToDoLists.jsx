@@ -12,7 +12,7 @@ const ToDoLists = () => {
         const fetchToDoLists = async () => {
             try {
                 const token = localStorage.getItem('Token');
-                const response = await fetch(`${import.meta.env.VITE_API_URL}todo-lists/`, {
+                const response = await fetch(`/todo-lists/`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Token ${token}`,
@@ -39,7 +39,7 @@ const ToDoLists = () => {
     const createToDoList = async () => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`${import.meta.env.VITE_API_URL}todo-lists/`, {
+            const response = await fetch(`/todo-lists/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const ToDoLists = () => {
     const editToDoList = async (editedToDoList) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`${import.meta.env.VITE_API_URL}todo-lists/${editedToDoList.id}/`, {
+            const response = await fetch(`/todo-lists/${editedToDoList.id}/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const ToDoLists = () => {
     const deleteToDoList = async (toDoListId) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`${import.meta.env.VITE_API_URL}todo-lists/${toDoListId}`, {
+            const response = await fetch(`/todo-lists/${toDoListId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -121,7 +121,7 @@ const ToDoLists = () => {
     const handleCheckboxChange = async (toDoListId, isChecked) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`${import.meta.env.VITE_API_URL}todo-lists/${toDoListId}/`, {
+            const response = await fetch(`/todo-lists/${toDoListId}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

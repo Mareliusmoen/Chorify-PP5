@@ -10,8 +10,7 @@ function SignUp() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const apiUrl = import.meta.env.VITE_API_URL;
-        const registrationUrl = `${apiUrl}auth/registration/`;
+        const registrationUrl = `/auth/registration/`;
 
         try {
             const response = await fetch(registrationUrl, {
