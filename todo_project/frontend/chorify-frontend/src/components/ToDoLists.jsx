@@ -122,15 +122,15 @@ const ToDoLists = () => {
         try {
             const token = localStorage.getItem('Token');
             const response = await fetch(`${import.meta.env.VITE_API_URL}todo-lists/${toDoListId}/`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Token ${token}`,
                 },
-                body: JSON.stringify({ done: isChecked }), // Use the passed isChecked value
+                body: JSON.stringify({ done: isChecked }),
                 credentials: 'include',
             });
-    
+
             if (response.ok) {
                 const updatedList = await response.json();
                 setToDoLists((prevLists) =>
@@ -159,18 +159,19 @@ const ToDoLists = () => {
             <ul className="list-group">
                 {toDoLists.map((toDoList) => (
                     <li key={toDoList.id} className="list-group-item">
-                        <div className="d-flex justify-content-between align-items-center">
-                            <div className="form-check">
-                            <input
+                        <div className="d-flex flex-column justify-content-between align-items-center">
+                            <div className=''>
+                                <span>{toDoList.due_date}</span>
+                            </div>
+                            <div>
+                                <input
                                     type="checkbox"
-                                    className="form-check-input"
+                                    className="form-check-input me-3"
                                     id={`doneCheckbox_${toDoList.id}`}
                                     checked={toDoList.done}
                                     onChange={(e) => handleCheckboxChange(toDoList.id, e.target.checked)}
                                 />
-                            </div>
-                            <span>{toDoList.description}</span>
-                            <div>
+                                <span>{toDoList.description}</span>
                                 <button
                                     type="button"
                                     className="btn btn-warning btn-sm ms-2"
@@ -244,9 +245,65 @@ const ToDoLists = () => {
             {/* Edit ToDo List Modal */}
             {editingToDoList && (
                 <div className="modal" id="editToDoModal">
-                    {/* ... (your existing modal code for editing a to-do list) */}
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+
+                            {/* Modal Header */}
+                            <div className="modal-header">
+                                <h5 className="modal-title">Edit ToDo List</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            {/* Modal Body */}
+                            <div className="modal-body">
+                                <div className="mb-3">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="ToDo List Description"
+                                        value={editingToDoList.description}
+                                        onChange={(e) => setEditingToDoList({ ...editingToDoList, description: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="mb-3">
+                                    <input
+                                        type="date"
+                                        className="form-control"
+                                        value={editingToDoList.due_date}
+                                        onChange={(e) => setEditingToDoList({ ...editingToDoList, due_date: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="form-check">
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id="editDoneCheckbox"
+                                        checked={editingToDoList.done}
+                                        onChange={(e) => setEditingToDoList({ ...editingToDoList, done: e.target.checked })}
+                                    />
+                                    <label className="form-check-label" htmlFor="editDoneCheckbox">
+                                        Done
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary" onClick={() => editToDoList(editingToDoList)} data-bs-dismiss="modal">
+                                    Save Changes
+                                </button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             )}
+
         </div>
     );
 };
