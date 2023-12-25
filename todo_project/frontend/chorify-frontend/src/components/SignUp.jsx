@@ -104,7 +104,7 @@ function SignUp() {
                         width: 155,
                         height: 155,
                     }}
-                    src="/chorify-logo.png"
+                    src="/static/assets/chorify-logo-iw10hy8l.png"
                 >
                 </Avatar>
                 <Typography component="h1" variant="h5">
