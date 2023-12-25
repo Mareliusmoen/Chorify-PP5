@@ -98,6 +98,7 @@ export default function SignIn() {
             
             // Get the CSRF token
             const csrfToken = getCookie('csrftoken');
+            console.log('CSRF Token:', csrfToken);
             const response = await fetch(signInUrl, {
                 method: 'POST',
                 headers: {
