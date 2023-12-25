@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import logo from '../assets/images/chorify-logo.png';
+
 
 
 const theme = createTheme({
@@ -137,7 +137,7 @@ export default function SignIn() {
                                 <h1>Chorify</h1>
                             </div>
                             <div className="col-auto">
-                                <img className="main-logo" src={logo} alt="Chorify logo" />
+                                <img className="main-logo" src="/static/assets/chorify-logo-iw10hy8l.png" alt="Chorify logo" />
                             </div>
                         </div>
                     </div>
