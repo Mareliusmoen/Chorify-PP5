@@ -27,7 +27,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://chorify-554b3183ed2e.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'chorify-554b3183ed2e.herokuapp.com']
+
 
 
 # Application definition
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://chorify-554b3183ed2e.herokuapp.com",
 ]
 
 CORS_ALLOW_METHODS = [
