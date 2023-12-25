@@ -73,9 +73,11 @@ CORS_ALLOW_HEADERS = [
     'dnt',
     'origin',
     'user-agent',
-    'x-csrftoken',
+    'X-CSRFToken',
     'x-requested-with',
 ]
+
+CSRF_COOKIE_NAME = "csrftoken"
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -158,11 +160,9 @@ AUTHENTICATION_BACKENDS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        # ... other authentication classes
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-        # ... other permission classes
     ),
 }
 # Internationalization
