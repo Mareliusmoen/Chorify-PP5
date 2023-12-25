@@ -90,7 +90,14 @@ export default function SignIn() {
         const signInUrl = `${apiUrl}auth/login/`;
 
         try {
-            const csrfToken = localStorage.getItem('csrftoken');
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+            
+            // Get the CSRF token
+            const csrfToken = getCookie('csrftoken');
             const response = await fetch(signInUrl, {
                 method: 'POST',
                 headers: {
