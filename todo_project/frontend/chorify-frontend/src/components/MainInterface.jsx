@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShoppingLists from './ShoppingLists';
 import ToDoLists from './ToDoLists';
+import logo from '../assets/images/chorify-logo.png';
 
 function MainInterface() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ function MainInterface() {
                     <h1>Chorify</h1>
                 </div>
                 <div className="col-auto">
-                    <img className="main-logo" src="/static/assets/chorify-logo-iw10hy8l.png" alt="Chorify logo" />
+                    <img className="main-logo" src={logo} alt="Chorify logo" />
                 </div>
             </div>
             

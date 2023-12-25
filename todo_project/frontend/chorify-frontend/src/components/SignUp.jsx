@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Box, Typography, Container, Avatar } from '@mui/material';
+import logo from '../assets/images/chorify-logo.png';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -104,7 +105,7 @@ function SignUp() {
                         width: 155,
                         height: 155,
                     }}
-                    src="/static/assets/chorify-logo-iw10hy8l.png"
+                    src={logo}
                 >
                 </Avatar>
                 <Typography component="h1" variant="h5">
