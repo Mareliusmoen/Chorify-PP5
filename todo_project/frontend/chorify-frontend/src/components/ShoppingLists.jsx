@@ -14,7 +14,7 @@ const ShoppingLists = () => {
             try {
                 const token = localStorage.getItem('Token');
 
-                const response = await fetch(`/shopping-lists/`, {
+                const response = await fetch(`/api/shopping-lists/`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Token ${token}`,
@@ -41,7 +41,7 @@ const ShoppingLists = () => {
     const createShoppingList = async () => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`/shopping-lists/`, {
+            const response = await fetch(`/api/shopping-lists/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const ShoppingLists = () => {
     const editShoppingList = async (editedShoppingList) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`/shopping-lists/${editedShoppingList.id}/`, {
+            const response = await fetch(`/api/shopping-lists/${editedShoppingList.id}/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ const ShoppingLists = () => {
     const deleteShoppingList = async (shoppingListId) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`/shopping-lists/${shoppingListId}`, {
+            const response = await fetch(`/api/shopping-lists/${shoppingListId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,
