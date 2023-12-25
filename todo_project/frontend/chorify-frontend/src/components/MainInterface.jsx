@@ -17,7 +17,7 @@ function MainInterface() {
                     <h1>Chorify</h1>
                 </div>
                 <div className="col-auto">
-                    <img className="main-logo" src="./src/assets/images/chorify-logo.png" alt="Chorify logo" />
+                    <img className="main-logo" src="/static/assets/chorify-logo.png" alt="Chorify logo" />
                 </div>
             </div>
             

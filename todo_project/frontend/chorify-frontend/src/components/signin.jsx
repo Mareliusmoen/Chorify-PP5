@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import logo from '../assets/images/chorify-logo.png';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -138,7 +136,7 @@ export default function SignIn() {
                                 <h1>Chorify</h1>
                             </div>
                             <div className="col-auto">
-                                <img className="main-logo" src="./src/assets/images/chorify-logo.png" alt="Chorify logo" />
+                                <img className="main-logo" src="/static/assets/chorify-logo.png" alt="Chorify logo" />
                             </div>
                         </div>
                     </div>
