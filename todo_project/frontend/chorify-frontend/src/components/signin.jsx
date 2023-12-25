@@ -86,8 +86,7 @@ export default function SignIn() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { username, password } = event.currentTarget.elements;
-        const apiUrl = "/api/";
-        const signInUrl = `${apiUrl}auth/login/`;
+        const signInUrl = `/auth/login/`;
 
         try {
             const response = await fetch(signInUrl, {
