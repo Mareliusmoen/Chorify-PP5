@@ -1,4 +1,4 @@
-# Chorify the simplistic chorekeeper app
+# Chorify, the simplistic chorekeeper app
 Welcome to Chorify, a task management application crafted with a mobile-first approach to streamline and organize your daily life. Our app is designed to keep you focused solely on your chores, thanks to its elegant black and white Scandinavian design. This minimalist aesthetic not only enhances user focus but also brings a familiar and consistent experience across devices. The design and layout you love on mobile are mirrored on desktop, ensuring you always recognize and comfortably navigate the app. Built using Vite+React for a fluid and intuitive user experience on mobile, Chorify also features a robust backend powered by Django Rest Framework, maintaining high performance and reliability across all platforms. Experience the simplicity and efficiency of task management with Chorify's seamless, mobile-first design.
 
 Link to the deployed version: [Chorify-App](https://chorify-554b3183ed2e.herokuapp.com/)
@@ -110,6 +110,7 @@ These user stories guide the design and development of Chorify, ensuring that we
     - **PyJWT**, Handles JSON Web Tokens for secure authentication.
     - **Whitenoise**, Simplifies static file management in Django applications.
     - **Git and GitHub**, Version control system used for source code management.
+    - GitHub Projects: Managed project tasks and tracked progress using boards and user stories.
     - **Heroku**, Cloud hosting service for deploying applications.
     - **VS Code**, IDE used for development.
 
@@ -187,6 +188,16 @@ The only Image in this app is the logo that is AI generated with [Gencraft](http
 
 <details>
 
+Log in:
+![Log in wireframe](todo_project/assets/images/log-in-wireframe.png)
+---
+
+Sign up:
+![Sign up wireframe](todo_project/assets/images/sign-up-wireframe.png)
+---
+
+Main interface:
+![main interface wireframe](todo_project/assets/images/main-interface-wireframe.png)
 
 </details>
 ---
@@ -499,8 +510,10 @@ The project was deployed to [Heroku](https://www.heroku.com) using the below pro
 
  But when clicked again the modal loads as intended.
 ## Credits
-
+ - **Vite**, This was the first time I used this amazing tool to build my frontend. And I higly recommend it, it is super fast and easy to use.
+ - **[The Javascript Mastery](https://www.youtube.com/@javascriptmastery)**, Amazing youtube channel that made React easy to understand and updated videos with the newest approach to coding with React.
 
 ---
 
 ## Acknowledgments
+As always thanks to my family for their patience while I was consumed by this project and my new job as a programmer at the same time.
