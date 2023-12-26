@@ -102,7 +102,7 @@ const ShoppingLists = () => {
     const deleteShoppingList = async (shoppingListId) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`/api/shopping-lists/${shoppingListId}`, {
+            const response = await fetch(`/api/shopping-lists/${shoppingListId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

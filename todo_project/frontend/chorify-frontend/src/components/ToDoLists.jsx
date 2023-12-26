@@ -101,7 +101,7 @@ const ToDoLists = () => {
     const deleteToDoList = async (toDoListId) => {
         try {
             const token = localStorage.getItem('Token');
-            const response = await fetch(`/api/todo-lists/${toDoListId}`, {
+            const response = await fetch(`/api/todo-lists/${toDoListId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
