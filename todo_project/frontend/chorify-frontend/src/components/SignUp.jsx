@@ -28,13 +28,13 @@ function SignUp() {
 
             if (response.status === 204) {
                 console.log('Registration successful');
-                navigate('/login');
+                navigate('/main-interface');
             } else {
                 const responseData = await response.json();
                 console.log('Registration successful:', responseData);
                 const token = responseData.key;
                 localStorage.setItem('Token', token);
-                navigate('/login');
+                navigate('/main-interface');
             }
         } catch (error) {
             console.error('Registration failed:', error);
