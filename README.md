@@ -2,6 +2,7 @@
 Welcome to Chorify, a task management application crafted with a mobile-first approach to streamline and organize your daily life. Our app is designed to keep you focused solely on your chores, thanks to its elegant black and white Scandinavian design. This minimalist aesthetic not only enhances user focus but also brings a familiar and consistent experience across devices. The design and layout you love on mobile are mirrored on desktop, ensuring you always recognize and comfortably navigate the app. Built using Vite+React for a fluid and intuitive user experience on mobile, Chorify also features a robust backend powered by Django Rest Framework, maintaining high performance and reliability across all platforms. Experience the simplicity and efficiency of task management with Chorify's seamless, mobile-first design.
 Link to the deployed version: [Chorify-App](https://chorify-554b3183ed2e.herokuapp.com/)
 
+![Index screenshot](todo_project/assets/images/screenshot.png)
 
 ## Table of Contents
 
@@ -171,12 +172,12 @@ This design approach not only makes Chorify aesthetically pleasing but also ensu
 
 ### Color Scheme
 
-![Color Scheme](assets/images/colorscheme.png)
+![Color Scheme](todo_project/assets/images/colorscheme.png)
 
 ### Imagery
 The only Image in this app is the logo that is AI generated with [Gencraft](https://gencraft.com/generate)
 
-![Chorify Logo](assets/images/chorify-logo.png)
+![Chorify Logo](todo_project/assets/images/chorify-logo.png)
 
 ### Wireframes
 
