@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * Represents a component that manages to-do lists.
+ * It allows users to create, edit, delete, and toggle completion status of to-do list items.
+ */
 const ToDoLists = () => {
     const [toDoLists, setToDoLists] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -9,6 +13,12 @@ const ToDoLists = () => {
     const [editingToDoList, setEditingToDoList] = useState(null);
 
     useEffect(() => {
+        /**
+         * Asynchronously fetches to-do lists from the server using a
+         * stored token for authorization, sets the to-do lists state,
+         * and handles any errors by logging them to the console. It
+         * also toggles the loading state regardless of outcome.
+         */
         const fetchToDoLists = async () => {
             try {
                 const token = localStorage.getItem('Token');
@@ -36,6 +46,22 @@ const ToDoLists = () => {
         fetchToDoLists();
     }, []);
 
+    /**
+     * Asynchronously creates a new to-do list by sending a POST
+     * request to the server with the new to-do list's details.
+     * On success, updates the list of to-do lists with the new
+     * one and clears the form fields. If the request fails, it
+     * logs an error in the console.
+     *
+     * Assumes the existence of the following state variables:
+     * `newToDoListDescription`, `newToDoListDueDate`, and
+     * `newToDoListDone`. Similarly, `setToDoLists`, 
+     * `setNewToDoListDescription`, `setNewToDoListDueDate`, 
+     * and `setNewToDoListDone` functions must be defined to
+     * update the state.
+     *
+     * @return {Promise<void>} No return value.
+     */
     const createToDoList = async () => {
         try {
             const token = localStorage.getItem('Token');
@@ -67,10 +93,27 @@ const ToDoLists = () => {
         }
     };
 
+    /**
+     * Sets the current to-do list as the one to be edited.
+     *
+     * @param {Array} toDoList - The to-do list to start editing.
+     * @return {void}
+     */
     const startEditing = (toDoList) => {
         setEditingToDoList(toDoList);
     };
 
+    /**
+     * Asynchronously updates a specific to-do list using a PUT 
+     * request to the server. It retrieves the token from local 
+     * storage for authorization, sends the edited to-do list in 
+     * the request body, and updates the local state with the 
+     * new to-do list upon a successful response.
+     *
+     * @param {Object} editedToDoList - The to-do list object 
+     *                                  with updated information.
+     * @return {void}
+     */
     const editToDoList = async (editedToDoList) => {
         try {
             const token = localStorage.getItem('Token');
@@ -98,6 +141,15 @@ const ToDoLists = () => {
         }
     };
 
+    /**
+     * Asynchronously deletes a to-do list by its ID from the server
+     * and updates the state to remove it from the local view.
+     *
+     * Uses the 'Token' from localStorage for authorization.
+     *
+     * @param {string} toDoListId - The ID of the to-do list to delete.
+     * @return {void} No return value.
+     */
     const deleteToDoList = async (toDoListId) => {
         try {
             const token = localStorage.getItem('Token');
@@ -119,6 +171,16 @@ const ToDoLists = () => {
             console.error('There has been a problem with your delete operation for to-do list:', error);
         }
     };
+    /**
+     * Asynchronously updates the status of a to-do list item by sending
+     * a PATCH request to the server with the new status.
+     *
+     * @param {string} toDoListId - The ID of the to-do list item to be
+     *                              updated.
+     * @param {boolean} isChecked - The new checked status of the to-do
+     *                              list item.
+     * @return {void}
+     */
     const handleCheckboxChange = async (toDoListId, isChecked) => {
         try {
             const token = localStorage.getItem('Token');

@@ -9,6 +9,12 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import './App.css';
 
+/**
+ * This is the root component of the Chorify app. It sets up routing for the
+ * application and renders the SignIn, SignUp, LogOut, and MainInterface
+ * components based on the current URL path. It also displays the Copyright
+ * component at the bottom of the page.
+ */
 function App() {
 
   function Copyright(props) {

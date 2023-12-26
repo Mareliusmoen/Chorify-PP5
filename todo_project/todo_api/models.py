@@ -6,6 +6,20 @@ from django.conf import settings
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
+        """
+        Creates a new user with the provided email and an optional password.
+
+        Parameters:
+        - email: A string representing the user's email address. Must be provided.
+        - password: An optional string for the user's password. If not provided,
+          no password will be set.
+
+        Raises:
+        - ValueError: If the email parameter is empty.
+
+        Returns:
+        The newly created user object.
+        """
         if not email:
             raise ValueError('Users must have an email address')
         
@@ -15,6 +29,16 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password):
+        """
+        Create a new superuser with the specified email and password.
+        
+        Parameters:
+        email (str): The email address for the new superuser.
+        password (str): The password for the new superuser.
+
+        Returns:
+        User: The newly created superuser instance.
+        """
         user = self.create_user(email, password=password)
         user.is_admin = True
         user.save(using=self._db)

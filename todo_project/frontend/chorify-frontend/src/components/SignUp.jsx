@@ -3,10 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Box, Typography, Container, Avatar } from '@mui/material';
 
 
+/**
+ * Handles user registration process including form submission,
+ * data validation, user feedback, and navigation upon successful
+ * registration.
+ */
 function SignUp() {
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
+    /**
+     * Handles the submission of the registration form.
+     * Prevents the default form submission, collects user data, 
+     * sends a POST request to the registration endpoint, and 
+     * navigates to the main interface upon successful registration.
+     * Stores the auth token in local storage if received.
+     * Sets an error if registration fails.
+     *
+     * @param {Object} event - The event object from the form submit
+     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);

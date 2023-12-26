@@ -4,9 +4,17 @@ import ShoppingLists from './ShoppingLists';
 import ToDoLists from './ToDoLists';
 
 
+/**
+ * Renders the main interface of the application, including
+ * navigation, logos, shopping lists, to-do lists, and a log
+ * out button.
+ */
 function MainInterface() {
     const navigate = useNavigate();
 
+    /**
+     * Redirects the user to the logout page.
+     */
     const handleLogout = () => {
         navigate('/logout');
     };

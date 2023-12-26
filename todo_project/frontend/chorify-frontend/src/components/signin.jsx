@@ -72,6 +72,20 @@ const theme = createTheme({
 
 
 
+/**
+ * SignIn component handling user authentication.
+ *
+ * This function component manages the sign-in process,
+ * including a form submission for user credentials and
+ * navigation based on the authentication state.
+ * It uses local storage to check if a user token exists
+ * and redirects to the main interface if authentication
+ * is verified. If the user is not authenticated, it 
+ * provides a form to sign in and a button to navigate
+ * to the sign-up page.
+ *
+ * @return {JSX.Element} The sign-in page UI component.
+ */
 export default function SignIn() {
     const navigate = useNavigate();
 
@@ -82,6 +96,18 @@ export default function SignIn() {
         }
     }, [navigate]);
 
+    /**
+     * Handles the form submission for user login, prevents 
+     * the default form submission, extracts the username 
+     * and password from the form, sends a POST request to 
+     * the login endpoint, and handles the response by 
+     * storing the received token and redirecting to the 
+     * main interface. If an error occurs, it is caught and 
+     * logged, and error handling procedures are executed.
+     *
+     * @param {Event} event - The event object from the form 
+     *                         submission.
+     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { username, password } = event.currentTarget.elements;
@@ -116,6 +142,9 @@ export default function SignIn() {
             // Handle errors, e.g., show error message to the user
         }
     };
+    /**
+     * Triggers navigation to the signup page.
+     */
     const handleSignUpClick = () => {
         navigate('/signup');
     };

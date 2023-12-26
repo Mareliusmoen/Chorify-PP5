@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * Represents a component that manages shopping lists.
+ * It allows users to create, edit, and delete shopping lists, and manage items within these lists.
+ */
 const ShoppingLists = () => {
     const [shoppingLists, setShoppingLists] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -10,6 +14,12 @@ const ShoppingLists = () => {
 
 
     useEffect(() => {
+        /**
+         * Asynchronously fetches shopping lists from the server,
+         * using the stored authentication token. If the response is
+         * successful, it updates the shopping lists state; otherwise,
+         * logs an error. Finally, sets the loading state to false.
+         */
         const fetchShoppingLists = async () => {
             try {
                 const token = localStorage.getItem('Token');
@@ -38,6 +48,18 @@ const ShoppingLists = () => {
         fetchShoppingLists();
     }, []);
 
+    /**
+     * Asynchronously creates a new shopping list by posting the 
+     * new list's name and items to the server. It uses the Token 
+     * from localStorage for authorization. Updates the shopping 
+     * lists state with the new list on a successful response and 
+     * resets the input fields. Logs an error in the console if 
+     * the operation fails.
+     *
+     * @param {String} newShoppingListName - Name for the new list.
+     * @param {Array} newShoppingListItems - Items to add to the new list.
+     * @return {void}
+     */
     const createShoppingList = async () => {
         try {
             const token = localStorage.getItem('Token');
@@ -69,9 +91,26 @@ const ShoppingLists = () => {
 
 
 
+    /**
+     * Initiates the editing process for a given
+     * shopping list.
+     *
+     * @param {Object} shoppingList - The shopping 
+     *     list to be edited.
+     * @return {void}
+     */
     const startEditing = (shoppingList) => {
         setEditingShoppingList(shoppingList);
     };
+    
+    /**
+     * Asynchronously edits a shopping list item using an API call and
+     * updates the local shopping lists state.
+     *
+     * @param {Object} editedShoppingList - The updated shopping list object
+     *                                      with an id property.
+     * @return {void} No return value.
+     */
     const editShoppingList = async (editedShoppingList) => {
         try {
             const token = localStorage.getItem('Token');
@@ -99,6 +138,16 @@ const ShoppingLists = () => {
         }
     };
 
+    /**
+     * Asynchronously deletes a shopping list by its ID using
+     * an API call with 'DELETE' method. Updates the state to
+     * remove the deleted list. Handles possible errors by
+     * logging them to the console.
+     *
+     * @param {string} shoppingListId - The ID of the shopping
+     *     list to be deleted.
+     * @return {void} No return value.
+     */
     const deleteShoppingList = async (shoppingListId) => {
         try {
             const token = localStorage.getItem('Token');
