@@ -105,6 +105,7 @@ const ShoppingLists = () => {
             const response = await fetch(`/api/shopping-lists/${shoppingListId}`, {
                 method: 'DELETE',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Token ${token}`,
                 },
                 credentials: 'include',

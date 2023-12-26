@@ -104,6 +104,7 @@ const ToDoLists = () => {
             const response = await fetch(`/api/todo-lists/${toDoListId}`, {
                 method: 'DELETE',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Token ${token}`,
                 },
                 credentials: 'include',
