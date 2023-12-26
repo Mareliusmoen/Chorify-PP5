@@ -5,7 +5,6 @@ Link to the deployed version: [Chorify-App](https://chorify-554b3183ed2e.herokua
 
 ![Index screenshot](todo_project/assets/images/screenshot.png)
 
-## Table of Contents
 
 ## User Experience Design
 
@@ -236,6 +235,61 @@ Edit todo item:
 
 </details>
 ---
+
+## Reuseable React components
+
+### ShoppingLists
+
+The `ShoppingLists` component is a versatile and dynamic React component designed for managing shopping lists within a web application. It provides a comprehensive solution for creating, editing, and deleting shopping lists, along with the capability to manage items within each list.
+
+#### Features
+
+- **Create New Lists:** Users can create new shopping lists, specifying both the name of the list and the items to be included.
+- **Edit Existing Lists:** The component allows for the editing of existing shopping lists. Users can modify the list's name and the items within it.
+- **Delete Lists:** Users have the option to delete any of the shopping lists.
+- **Asynchronous Data Handling:** The component communicates with a server to fetch, create, update, and delete shopping lists, using asynchronous API calls.
+- **Local State Management:** It uses React's `useState` hook for managing the state of shopping lists, loading status, new list details, and the current list being edited.
+- **Effect Hook Usage:** The `useEffect` hook is utilized to fetch existing shopping lists from the server upon component mounting.
+- **Error Handling:** The component handles errors during API calls and logs them to the console.
+
+#### Usage
+
+The component displays a list of current shopping lists and provides buttons for creating a new list or editing and deleting existing ones. It uses modals for creating and editing lists, offering a user-friendly interface for list management.
+
+#### Code Structure
+
+- **State Variables:** Includes state variables for storing shopping lists, loading status, new list details, and the current list being edited.
+- **API Integration:** Functions for fetching, creating, editing, and deleting shopping lists through API calls.
+- **Modals for Create and Edit:** Separate modals are provided for adding a new shopping list and editing an existing one, ensuring a seamless user experience.
+
+This component is an excellent example of a reusable and modular React component, ideal for applications requiring shopping list management functionality.
+
+### Todo list
+
+The `ToDoLists` component is a dynamic and user-friendly React component designed for managing to-do lists. This component facilitates the creation, editing, deletion, and tracking of the completion status of to-do list items.
+
+#### Features
+
+- **Create New To-Do Lists:** Enables users to create new to-do lists with a description, due date, and completion status.
+- **Edit Existing Lists:** Users can edit the details of existing to-do lists, including their descriptions, due dates, and completion statuses.
+- **Delete Lists:** Provides functionality to delete to-do lists.
+- **Toggle Completion Status:** Users can mark to-do items as complete or incomplete.
+- **Asynchronous Operations:** The component performs asynchronous API calls to fetch, create, update, and delete to-do lists.
+- **Loading State Management:** Utilizes React's `useState` hook to manage the loading state during API calls.
+- **Error Handling:** Includes robust error handling during API interactions, with errors logged to the console.
+
+#### Usage
+
+The component displays the list of to-do items with due dates and checkboxes to indicate completion. It provides modals for creating and editing to-do lists, ensuring a seamless user experience.
+
+#### Code Structure
+
+- **State Variables:** Manages to-do lists, loading status, and details of the new and currently edited to-do list using state variables.
+- **API Integration:** Contains functions for fetching, creating, editing, and deleting to-do lists via API calls.
+- **Modals for Create and Edit:** Utilizes separate modals for adding new to-do lists and editing existing ones, enhancing user interaction.
+- **Checkbox for Completion Status:** Includes a checkbox in each to-do list item for marking the completion status.
+
+This component exemplifies a reusable and efficient React component suitable for applications requiring task management functionalities.
 
 ## Information Architecture
 
