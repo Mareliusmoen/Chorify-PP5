@@ -1,5 +1,6 @@
 # Chorify the simplistic chorekeeper app
 Welcome to Chorify, a task management application crafted with a mobile-first approach to streamline and organize your daily life. Our app is designed to keep you focused solely on your chores, thanks to its elegant black and white Scandinavian design. This minimalist aesthetic not only enhances user focus but also brings a familiar and consistent experience across devices. The design and layout you love on mobile are mirrored on desktop, ensuring you always recognize and comfortably navigate the app. Built using Vite+React for a fluid and intuitive user experience on mobile, Chorify also features a robust backend powered by Django Rest Framework, maintaining high performance and reliability across all platforms. Experience the simplicity and efficiency of task management with Chorify's seamless, mobile-first design.
+
 Link to the deployed version: [Chorify-App](https://chorify-554b3183ed2e.herokuapp.com/)
 
 ![Index screenshot](todo_project/assets/images/screenshot.png)
@@ -28,6 +29,8 @@ Chorify is designed for individuals who value organization and efficiency in the
 Our application is suitable for anyone who desires a seamless and straightforward digital solution for managing their everyday tasks and shopping lists, regardless of their tech-savvy level.
 
 ### Responsiveness
+
+![Responsiveness Screenshot](todo_project/assets/images/responsive-screenshot.png)
 
 In the design of Chorify, we have embraced a mobile-first approach, acknowledging the growing prevalence of mobile devices in our daily lives. This strategy ensures that the core functionality and aesthetic appeal of the app are optimized for smaller screens, delivering a seamless and efficient user experience on mobile devices.
 
@@ -188,6 +191,41 @@ The only Image in this app is the logo that is AI generated with [Gencraft](http
 </details>
 ---
 
+### Screenshots
+
+<details>
+
+Log in:
+![Log in](todo_project/assets/images/log-in.png)
+---
+
+Sign up:
+![Sign up](todo_project/assets/images/sign-up.png)
+---
+
+Create new shoppinglist:
+![Create new shoppinglist](todo_project/assets/images/new-shoppinglist.png)
+---
+
+Edit shoppinglists:
+![Edit shoppinglists](todo_project/assets/images/edit-shoppinglists.png)
+---
+
+Expanding shoppinglists to see content:
+![Expanding shoppinglists](todo_project/assets/images/shoppinglist-expand.png)
+---
+
+Create new todo item:
+![Create new todo item](todo_project/assets/images/new-todo-item.png)
+---
+
+Edit todo item:
+![Edit todo item](todo_project/assets/images/edit-todo.png)
+---
+
+</details>
+---
+
 ## Information Architecture
 
 ### Database
@@ -259,7 +297,6 @@ In our Django REST application, we've designed models to structure our data effi
  - Includes a description, completion status, due date, and user linkage.
 
 
-These models form the backbone of our application, enabling users to manage their shopping lists and to-do items effectively. They are designed to be both flexible and straightforward, reflecting the needs of modern-day task management.
 ---
 
 ## API Endpoints
@@ -457,7 +494,10 @@ The project was deployed to [Heroku](https://www.heroku.com) using the below pro
 ## Bugs
 
 ### Unfixed bugs
+ - **Backdrop loading issue**, when clicking the edit button for either the shoppinglists or todo items the backdrop is not loading and this error is logged in the console: 
+ Uncaught TypeError: Cannot read properties of undefined (reading 'backdrop')
 
+ But when clicked again the modal loads as intended.
 ## Credits
 
 
